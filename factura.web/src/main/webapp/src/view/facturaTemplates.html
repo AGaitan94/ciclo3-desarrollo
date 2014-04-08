@@ -1,0 +1,52 @@
+<script type="text/template" id="facturaList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>fecha</th>
+		 <th>costoTotal</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(facturas, function(factura) { %>
+    <tr>
+		<td><%= htmlEncode(factura.getDisplay('fecha')) %></td>
+		<td><%= htmlEncode(factura.getDisplay('costoTotal')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-factura-edit',{id:<%= factura.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-factura-delete',{id:<%= factura.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="factura">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-facturaForm">
+    <% if(factura.id) {%>
+    <input type="hidden" name="id" value="<%= factura.id %>"/>
+    <% }%>
+		<div class="form-group" >
+			<label for="fecha">fecha</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="fecha"  name="fecha" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#fecha').datepicker({autoclose:true});
+        	$('#fecha').datepicker('setDate',new Date(<%= factura.get('fecha') %>));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+		<div class="form-group" >
+		<label for="costoTotal">costoTotal</label>
+    	<input type="text" class="form-control" id="costoTotal" name="costoTotal" placeholder="Enter value" value="<%= factura.get('costoTotal') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 
