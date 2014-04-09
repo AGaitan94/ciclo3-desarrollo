@@ -1,9 +1,0 @@
-{
-    "displayName" : "Factura",
-    "name" : "factura",
-    "templateName" : "factura",
-    "url" : "user.html",
-    "server": "localhost:8080",
-    "context": "/factura.service.subsystem.web/webresources/Factura",
-    "el" : "#main"
-}
